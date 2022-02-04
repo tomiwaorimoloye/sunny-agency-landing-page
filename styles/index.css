@@ -54,6 +54,7 @@ header {
 	/* height: 790px; */
 	color: var(--white);
 	text-align: center;
+	padding: 1.875rem 2.5rem 0;
 }
 
 @media screen and (max-width: 950px) {
@@ -66,11 +67,11 @@ nav {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 1.875rem 2.5rem;
 }
 
 #navlinks {
 	display: flex;
+	position: relative;
 	align-items: center;
 }
 
@@ -79,37 +80,24 @@ nav {
 	margin: 0 1.25rem;
 }
 
-@media screen and (max-width: 950px) {
-	#navlinks {
-		flex-direction: column;
-	}
-}
-
 #navlinks button {
 	font-family: "Fraunces", serif;
 	background-color: var(--white);
 	text-transform: uppercase;
 	transition: background-color 200ms;
+	cursor: pointer;
 }
 
-#navlinks button:hover {
-	color: var(--white);
-	background-color: rgba(255, 255, 255, 0.3);
-	cursor: pointer;
+/* only show hover ui when in desktop mode */
+@media screen and (min-width: 950px) {
+	#navlinks button:hover {
+		color: var(--white);
+		background-color: rgba(255, 255, 255, 0.3);
+	}
 }
 
 .burger {
 	display: none;
-}
-
-@media screen and (max-width: 950px) {
-	#navlinks {
-		display: none;
-	}
-
-	.burger {
-		display: block;
-	}
 }
 
 .hero {
@@ -134,12 +122,71 @@ h1 {
 @media screen and (max-width: 950px) {
 	h1 {
 		font-size: 2rem;
+		margin: 3.5rem 0;
 	}
 }
 
 #arrow {
 	text-align: center;
 	margin-bottom: 18rem;
+}
+
+/* TODO: fix bug for mobile nav...the nav width isn't consistent with other view-widths */
+@media screen and (max-width: 950px) {
+	header {
+		position: relative;
+	}
+
+	#navlinks {
+		flex-direction: column;
+		display: none;
+		position: absolute;
+		top: 105px;
+		left: 0;
+		background-color: var(--white);
+		color: var(--dark-grayish-blue);
+		padding: 40px 55px;
+		margin: 0 2.5rem;
+	}
+
+	#navlinks::before {
+		content: "";
+		position: absolute;
+		top: -25px;
+		right: 0;
+		width: 0;
+		height: 0;
+		border-top: 25px solid var(--white);
+		border-left: 25px solid transparent;
+		border-bottom: 25px solid transparent;
+		border-right: 25px solid transparent;
+		transform: translateX(50%) rotate(-45deg);
+	}
+
+	#navlinks li {
+		margin: 20px;
+	}
+
+	#navlinks li:first-child {
+		margin-top: 0;
+	}
+
+	#navlinks li:last-child {
+		margin-bottom: 0;
+	}
+
+	#navlinks button {
+		background-color: var(--yellow);
+		font-weight: bold;
+	}
+
+	.burger {
+		display: block;
+	}
+
+	#arrow {
+		margin-bottom: 11rem;
+	}
 }
 
 h2 {
@@ -153,12 +200,8 @@ h2 {
 }
 
 @media screen and (max-width: 950px) {
-	#arrow {
-		margin-bottom: 10rem;
-	}
-
 	.features {
-		grid-template-columns: 1fr;
+		grid-template-columns: 100%;
 	}
 }
 
